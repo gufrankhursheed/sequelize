@@ -6,7 +6,9 @@ dotenv.config({
     path: "./.env"
 })
 
-sequelize.sync({force: false})
+sequelize.sync({ force: false }).then(() => {
+    console.log("Database synced");
+});
 
 connectDB()
 .then(() => {
