@@ -1,3 +1,4 @@
+import Post from "../model/post.model.js";
 import User from "../model/user.model.js";
 
 const createUser = async (req, res) => {
@@ -11,19 +12,23 @@ const createUser = async (req, res) => {
 
 const getAllUser = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      include: Post,
+    })
     return res.status(200).json({ message: "Get all users", users });
   } catch (error) {
-    console.log("Error getting all users");
+    console.log("Error getting all users:", error);
   }
 };
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, {
+        include: Post,
+    })
     return res.status(200).json({ message: "Get user", user });
   } catch (error) {
-    console.log("Error getting user");
+    console.log("Error getting user:", error);
   }
 };
 
@@ -39,7 +44,7 @@ const updateUser = async (req, res) => {
 
     return res.status(200).json({ message: "Get user", user });
   } catch (error) {
-    console.log("Error updating user");
+    console.log("Error updating user:", error);
   }
 };
 
@@ -51,11 +56,11 @@ const deleteUser = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
 
-    await user.destroy()
+    await user.destroy();
 
     return res.status(200).json({ message: "User deleted", user });
   } catch (error) {
-    console.log("Error deleting user");
+    console.log("Error deleting user:", error);
   }
 };
 

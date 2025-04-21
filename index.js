@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 import app from "./app.js"
 import { connectDB, sequelize } from "./src/db/index.js"
+import "./association.js"
 
 dotenv.config({
     path: "./.env"

@@ -1,13 +1,19 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db/index.js";
 
-const Post = sequelize.define('Post', {
+const Post = sequelize.define(
+  "Post",
+  {
     title: {
-        type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     content: {
-        type: DataTypes.TEXT
-    }
-})
+      type: DataTypes.TEXT,
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
 
-export default Post
+export default Post;
